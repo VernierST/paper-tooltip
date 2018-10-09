@@ -42,6 +42,7 @@ Custom property | Description | Default
 `--paper-tooltip-background` | The background color of the tooltip | `#616161`
 `--paper-tooltip-opacity` | The opacity of the tooltip | `0.9`
 `--paper-tooltip-text-color` | The text color of the tooltip | `white`
+`--paper-tooltip-font-size` | The size of the tooltip font | `10px`
 `--paper-tooltip` | Mixin applied to the tooltip | `{}`
 `--paper-tooltip-delay-in` | Delay before tooltip starts to fade in | `500`
 `--paper-tooltip-delay-out` | Delay before tooltip starts to fade out | `0`
@@ -72,12 +73,13 @@ Custom property | Description | Default
         display: block;
         outline: none;
         @apply --paper-font-common-base;
-        font-size: 10px;
+        font-size: var(--paper-tooltip-font-size, 10px);
         line-height: 1;
         background-color: var(--paper-tooltip-background, #616161);
         color: var(--paper-tooltip-text-color, white);
         padding: 8px;
         border-radius: 2px;
+        white-space: nowrap;
         @apply --paper-tooltip;
       }
 
