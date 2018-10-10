@@ -364,6 +364,10 @@ Custom property | Description | Default
         }
       },
 
+      touched: function () {
+          this.isTouch = true;
+      },
+
       /**
        * Cancels the animation and either fully shows or fully hides tooltip
        */
@@ -378,7 +382,7 @@ Custom property | Description | Default
        */
       show: function() {
         // If the tooltip is already showing, there's nothing to do.
-        if (this._showing)
+        if (this._showing || this.isTouch)
           return;
 
         if (Polymer.dom(this).textContent.trim() === '') {
@@ -491,11 +495,12 @@ Custom property | Description | Default
       },
       _addListeners: function() {
         if (this._target) {
+          this.listen(this._target, 'touchstart', 'touched');
           this.listen(this._target, 'mouseenter', 'show');
           this.listen(this._target, 'focus', 'show');
           this.listen(this._target, 'mouseleave', 'hide');
           this.listen(this._target, 'blur', 'hide');
-          this.listen(this._target, 'tap', 'hide');
+          this.listen(this._target, 'click', 'hide');
         }
         this.listen(this.$.tooltip, 'animationend', '_onAnimationEnd');
         this.listen(this, 'mouseenter', 'hide');
