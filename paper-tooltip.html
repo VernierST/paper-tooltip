@@ -77,8 +77,8 @@ Custom property | Description | Default
         line-height: 1;
         background-color: var(--paper-tooltip-background, #616161);
         color: var(--paper-tooltip-text-color, white);
-        padding: 8px;
-        border-radius: 2px;
+        padding: .5rem;
+        border-radius: .125rem;
         white-space: nowrap;
         @apply --paper-tooltip;
       }
@@ -261,7 +261,7 @@ Custom property | Description | Default
          * The spacing between the top of the tooltip and the element it is
          * anchored to.
          */
-        offset: {type: Number, value: 14},
+        offset: {type: Number, value: 8},
         /**
          * This property is deprecated, but left over so that it doesn't
          * break exiting code. Please use `offset` instead. If both `offset` and
@@ -440,7 +440,8 @@ Custom property | Description | Default
       updatePosition: function() {
         if (!this._target || !this.offsetParent)
           return;
-        var offset = this.offset;
+        var remRatio = parseFloat(getComputedStyle(document.body).fontSize) / 16;
+        var offset = this.offset * remRatio;
         // If a marginTop has been provided by the user (pre 1.0.3), use it.
         if (this.marginTop != 14 && this.offset == 14)
           offset = this.marginTop;
